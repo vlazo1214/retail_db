@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: retail_container
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: retail_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d 
+    ports:
+      - "5432:5432"
+
+  # web-based explorer to monitor db
+  db_explorer:
+    image: dpage/pgadmin4
+    container_name: pgadmin_explorer
+    environment:
+      # credentials when logging into dashboard
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "8001:80"
+    volumes:
+          - pgadmin_data:/var/lib/pgadmin 
+    depends_on:
+      - db
+
+  # app:
+  #   build: .
+  #   container_name: app
+  #   restart: always
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - DATABASE_URL=postgresql://admin:postgres_password@db:5432/xapi_data
+  #     - FLASK_ENV=development
+  #   depends_on:
+  #     - db
+  #   command: ["/bin/bash", "/app/boot.sh"]
+  #   volumes:
+  #     - .:/app
+  #     - ./keys:/app/keys
+  #
+
+volumes:
+  pgdata:
+  pgadmin_data:

@@ -1,0 +1,6 @@
+.env
+
+# directories
+keys/
+__pycache__/
+database/
