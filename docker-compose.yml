@@ -6,14 +6,14 @@ services:
     container_name: retail_container
     restart: always
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: retail_db
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init-db:/docker-entrypoint-initdb.d 
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
 
   # web-based explorer to monitor db
   db_explorer:

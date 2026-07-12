@@ -1,0 +1,74 @@
+product_id,product_name,category,unit_price,reorder_level,supplier_id
+1,Bananas,Produce,1.57,20,5
+2,Gala Apples,Produce,2.58,10,4
+3,Roma Tomatoes,Produce,4.21,25,1
+4,Baby Carrots,Produce,4.3,100,5
+5,Russet Potatoes,Produce,6.3,20,5
+6,Yellow Onions,Produce,2.14,10,1
+7,Avocados,Produce,4.96,20,1
+8,Strawberries,Produce,6.12,10,4
+9,Blueberries,Produce,2.66,100,3
+10,Broccoli Crowns,Produce,1.97,20,2
+11,Iceberg Lettuce,Produce,5.01,100,1
+12,Limes,Produce,4.64,15,5
+13,Publix Whole Milk Gallon,Dairy,6.5,15,4
+14,Publix 2% Milk Half Gallon,Dairy,4.58,100,5
+15,Large Grade A Eggs (Dozen),Dairy,3.7,20,1
+16,Publix Salted Butter,Dairy,3.75,10,3
+17,Shredded Mozzarella Cheese,Dairy,4.7,10,2
+18,Greek Yogurt (32oz),Dairy,7.51,50,3
+19,Heavy Whipping Cream,Dairy,3.66,25,4
+20,American Cheese Slices,Dairy,7.36,100,4
+21,Boneless Chicken Breast,Meat & Seafood,6.56,15,2
+22,80/20 Ground Beef,Meat & Seafood,13.18,50,3
+23,Applewood Smoked Bacon,Meat & Seafood,13.21,25,5
+24,Atlantic Salmon Fillet,Meat & Seafood,9.38,15,2
+25,Publix Deli Rotisserie Chicken,Meat & Seafood,10.59,10,1
+26,Pork Tenderloin,Meat & Seafood,14.46,15,2
+27,Jumbo Shrimp (Peeled & Deveined),Meat & Seafood,13.7,25,5
+28,Italian Sausage Links,Meat & Seafood,5.69,25,5
+29,Publix Bakery French Bread,Bakery,24.9,50,3
+30,Cuban Bread Loaf,Bakery,24.35,10,1
+31,Chocolate Chip Cookies (12ct),Bakery,17.99,50,3
+32,Key Lime Pie,Bakery,19.9,20,1
+33,Publix Deli Cuban Sandwich,Bakery,9.45,15,4
+34,Dozen Glazed Donuts,Bakery,3.06,100,3
+35,Sourdough Boule,Bakery,24.37,15,5
+36,"Birthday Cake, 8-inch Round",Bakery,23.07,100,3
+37,Frozen Mixed Vegetables,Frozen,8.88,50,5
+38,Publix Vanilla Ice Cream,Frozen,4.38,20,2
+39,Frozen Pepperoni Pizza,Frozen,6.77,50,1
+40,Frozen Waffles,Frozen,7.18,25,1
+41,Frozen Chicken Tenders,Frozen,3.77,20,3
+42,Frozen Shrimp Bag,Frozen,4.67,15,5
+43,Frozen Pie Crust (2ct),Frozen,9.62,10,4
+44,Frozen Orange Juice Concentrate,Frozen,8.7,50,2
+45,"Publix Pasta, 16oz",Pantry,2.45,25,5
+46,Marinara Sauce Jar,Pantry,2.73,50,5
+47,"Jasmine Rice, 2lb",Pantry,4.66,15,5
+48,Extra Virgin Olive Oil,Pantry,7.15,100,2
+49,Creamy Peanut Butter,Pantry,6.84,25,3
+50,Canned Black Beans,Pantry,4.78,50,4
+51,"All-Purpose Flour, 5lb",Pantry,2.4,15,1
+52,"Granulated Sugar, 4lb",Pantry,4.03,50,5
+53,"Cereal, Family Size",Pantry,3.22,15,1
+54,"Publix Orange Juice, 59oz",Beverages,2.77,100,1
+55,Bottled Spring Water (24pk),Beverages,4.51,10,3
+56,"Ground Coffee, 12oz",Beverages,2.77,15,3
+57,"Sweet Tea, Gallon",Beverages,9.35,15,5
+58,Sparkling Water (8pk),Beverages,3.45,50,5
+59,Cola 12-pack Cans,Beverages,7.19,25,4
+60,"Publix Lemonade, 59oz",Beverages,4.08,10,4
+61,Paper Towels (6 Big Rolls),Household,9.66,25,4
+62,Bath Tissue (12 Mega Rolls),Household,17.81,10,1
+63,Laundry Detergent,Household,4.96,100,3
+64,Dish Soap,Household,16.8,10,2
+65,Trash Bags (30ct),Household,7.06,50,4
+66,All-Purpose Cleaner Spray,Household,6.23,15,3
+67,"Aluminum Foil, 75 sq ft",Household,11.39,10,4
+68,Publix Deli Sliced Turkey Breast,Deli,10.45,50,1
+69,"Provolone Cheese, Sliced",Deli,4.39,50,1
+70,Publix Chicken Tender Sub,Deli,11.74,15,2
+71,"Potato Salad (Deli, 1lb)",Deli,7.24,25,2
+72,"Publix Deli Ham, Sliced",Deli,10.91,10,2
+73,"Macaroni Salad (Deli, 1lb)",Deli,7.02,25,3
