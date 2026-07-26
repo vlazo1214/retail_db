@@ -1,0 +1,101 @@
+employee_id,employee_name,role,store_id
+1,Alex Spencer,Assistant Store Manager,7
+2,Adrienne Zimmerman,Assistant Store Manager,6
+3,Austin Johnson,Cake Decorator,6
+4,Jose Ramirez,Bakery Associate,5
+5,Mr. Nathaniel Khan,Pharmacy Technician,1
+6,Dana Kennedy,Pharmacist,8
+7,Brandon Hopkins,Deli Associate,2
+8,Jason Shields,Grocery Stock Clerk,2
+9,Matthew Lucas,Deli Associate,5
+10,Nicholas Mcbride,Cake Decorator,10
+11,Corey Herrera,Cake Decorator,6
+12,Clifford Ford,Bakery Associate,4
+13,Angela Morton,Pharmacist,2
+14,Annette Pearson,Store Manager,4
+15,Alexis Davis,Pharmacy Technician,5
+16,Cynthia Russell,Assistant Store Manager,4
+17,Dr. Steven Martin,Cake Decorator,2
+18,James House,Grocery Stock Clerk,5
+19,Dominique Horton,Produce Associate,6
+20,Rachel Stanley,Customer Service Manager,6
+21,Mr. Daniel Brown,Bagger,4
+22,Amy Edwards,Meat & Seafood Associate,5
+23,John Calhoun,Pharmacist,2
+24,Amy Romero,Bakery Associate,3
+25,Andrea Jones,Deli Associate,4
+26,Jennifer David,Customer Service Manager,8
+27,Lauren Williams,Grocery Stock Clerk,5
+28,Matthew Cunningham,Meat & Seafood Associate,9
+29,Dean Santiago,Front Service Clerk,6
+30,Derek Anderson,Cake Decorator,1
+31,Joyce Hickman,Front Service Clerk,1
+32,Alexandra Howell,Pharmacy Technician,6
+33,Ariel Medina,Grocery Stock Clerk,5
+34,Brandi Bailey,Assistant Store Manager,4
+35,David Mitchell,Bakery Associate,6
+36,Joshua Turner,Front Service Clerk,8
+37,Dr. Kendra Contreras,Grocery Stock Clerk,8
+38,Tara Garcia,Customer Service Manager,5
+39,Deborah Preston,Customer Service Manager,4
+40,Brittney Campbell,Pharmacist,9
+41,Grant Watts,Deli Associate,5
+42,Kathy King,Pharmacist,10
+43,Amber Walters,Grocery Stock Clerk,10
+44,Amanda Cook,Grocery Stock Clerk,6
+45,William Martin,Front Service Clerk,3
+46,Michael Hoffman,Deli Associate,8
+47,Tony Vazquez,Assistant Store Manager,1
+48,Andrew Wood,Cake Decorator,2
+49,Jessica Williams,Customer Service Manager,3
+50,Timothy Stanton,Pharmacy Technician,7
+51,Hunter Fleming,Bakery Associate,2
+52,Heather Castro,Grocery Stock Clerk,7
+53,Valerie Brady,Bakery Associate,8
+54,Cynthia Martin,Deli Associate,5
+55,Cassandra Gutierrez,Deli Associate,1
+56,Tim Patton,Meat & Seafood Associate,2
+57,Michael Moss,Meat & Seafood Associate,9
+58,Christopher Haynes,Pharmacy Technician,5
+59,Andrew Ruiz,Pharmacy Technician,6
+60,Thomas Bailey,Assistant Store Manager,5
+61,Shelby Walker,Grocery Stock Clerk,3
+62,Jennifer Ramirez,Produce Associate,1
+63,Raymond Bell,Pharmacist,5
+64,Meghan Anthony,Deli Associate,3
+65,Alexander Wiley,Deli Associate,2
+66,Kevin Terrell,Cake Decorator,5
+67,Kyle Reed,Cake Decorator,9
+68,Jessica Joyce,Bakery Associate,4
+69,Steven Lee,Customer Service Manager,6
+70,Jeffrey Meyer,Pharmacy Technician,3
+71,Melissa Bentley,Deli Associate,9
+72,Christina Reynolds,Store Manager,10
+73,Tammie Hanson,Bagger,8
+74,Belinda Mccullough,Store Manager,2
+75,Mary Nguyen,Bagger,5
+76,Kristen Lee,Front Service Clerk,1
+77,Jamie Adkins,Front Service Clerk,10
+78,Keith Sullivan,Assistant Store Manager,2
+79,Elizabeth Clark,Pharmacist,8
+80,Lisa Morris,Cake Decorator,2
+81,Michael Dixon,Pharmacy Technician,9
+82,Toni Fitzgerald,Pharmacy Technician,3
+83,Diane Beck,Customer Service Manager,8
+84,Anna Crane,Deli Associate,3
+85,Eric Drake,Cashier,9
+86,Angel Riggs,Cake Decorator,10
+87,Patricia Gibson,Grocery Stock Clerk,4
+88,Laura Higgins,Deli Associate,4
+89,James Hernandez,Pharmacist,5
+90,Stephanie Dalton,Grocery Stock Clerk,6
+91,Paula Robinson,Produce Associate,9
+92,Melissa Marshall,Produce Associate,2
+93,Sylvia Martinez,Front Service Clerk,4
+94,John Schmidt,Assistant Store Manager,6
+95,Emily Fischer,Store Manager,10
+96,Robert Mcclain,Deli Associate,4
+97,Terry Griffin,Bakery Associate,4
+98,Scott Cole,Store Manager,2
+99,Sara Ramirez,Pharmacist,1
+100,Kari Allen,Front Service Clerk,2

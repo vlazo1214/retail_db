@@ -1,0 +1,101 @@
+history_id,previous_role,new_role,promotion_date,termination_date,employee_id
+1,Assistant Store Manager,Deli Associate,2026-05-25,2027-02-13,31
+2,Produce Associate,Front Service Clerk,2025-09-14,2026-08-31,70
+3,Bakery Associate,Bakery Associate,2026-02-11,2027-02-11,61
+4,Pharmacy Technician,Grocery Stock Clerk,2025-10-21,2026-08-18,25
+5,Meat & Seafood Associate,Grocery Stock Clerk,2026-03-22,2026-10-12,46
+6,Produce Associate,Cake Decorator,2025-04-19,2026-01-29,94
+7,Meat & Seafood Associate,Meat & Seafood Associate,2026-05-02,2027-04-19,13
+8,Pharmacist,Bagger,2026-04-25,2027-02-02,14
+9,Front Service Clerk,Deli Associate,2025-10-15,2026-06-01,58
+10,Customer Service Manager,Cashier,2026-02-03,2026-11-18,60
+11,Produce Associate,Pharmacy Technician,2025-10-14,2026-05-01,71
+12,Meat & Seafood Associate,Deli Associate,2026-03-18,2026-09-26,2
+13,Customer Service Manager,Grocery Stock Clerk,2026-03-23,2026-11-18,63
+14,Cake Decorator,Grocery Stock Clerk,2025-02-19,2025-10-11,8
+15,Store Manager,Grocery Stock Clerk,2026-01-09,2026-10-13,34
+16,Grocery Stock Clerk,Pharmacist,2025-03-18,2025-11-26,94
+17,Pharmacist,Produce Associate,2024-12-04,2025-11-18,20
+18,Front Service Clerk,Store Manager,2025-12-14,2026-08-26,75
+19,Pharmacist,Bagger,2024-12-18,2025-07-01,8
+20,Produce Associate,Deli Associate,2026-05-06,2027-03-31,68
+21,Deli Associate,Assistant Store Manager,2026-01-16,2026-07-29,24
+22,Assistant Store Manager,Meat & Seafood Associate,2026-04-17,2027-03-15,31
+23,Bakery Associate,Front Service Clerk,2025-05-09,2025-12-05,75
+24,Bakery Associate,Assistant Store Manager,2024-10-26,2025-05-04,54
+25,Bakery Associate,Deli Associate,2024-08-22,2025-07-17,41
+26,Meat & Seafood Associate,Pharmacist,2025-10-02,2026-05-22,41
+27,Grocery Stock Clerk,Customer Service Manager,2025-10-25,2026-06-29,86
+28,Produce Associate,Bagger,2024-09-04,2025-05-18,97
+29,Produce Associate,Bakery Associate,2026-04-13,2026-10-12,73
+30,Deli Associate,Front Service Clerk,2026-03-16,2026-09-30,65
+31,Bagger,Assistant Store Manager,2025-09-28,2026-04-29,32
+32,Customer Service Manager,Produce Associate,2025-06-13,2026-02-20,70
+33,Pharmacy Technician,Meat & Seafood Associate,2025-08-21,2026-07-23,68
+34,Cake Decorator,Deli Associate,2026-06-18,2027-06-03,39
+35,Customer Service Manager,Cashier,2024-08-16,2025-03-10,15
+36,Customer Service Manager,Cashier,2026-03-09,2027-01-24,37
+37,Pharmacist,Bagger,2024-10-15,2025-06-05,27
+38,Deli Associate,Produce Associate,2024-09-15,2025-05-20,33
+39,Meat & Seafood Associate,Grocery Stock Clerk,2026-05-05,2026-11-24,36
+40,Bagger,Pharmacy Technician,2026-05-12,2026-11-08,17
+41,Customer Service Manager,Pharmacist,2024-09-12,2025-05-17,57
+42,Grocery Stock Clerk,Deli Associate,2024-12-09,2025-12-04,2
+43,Pharmacist,Customer Service Manager,2026-03-04,2026-09-19,70
+44,Bakery Associate,Deli Associate,2026-05-21,2027-02-19,19
+45,Store Manager,Cashier,2025-04-12,2025-11-10,47
+46,Front Service Clerk,Meat & Seafood Associate,2026-05-17,2027-02-12,32
+47,Bagger,Pharmacy Technician,2024-08-13,2025-03-07,72
+48,Pharmacist,Customer Service Manager,2025-05-06,2026-04-09,31
+49,Grocery Stock Clerk,Store Manager,2026-01-11,2026-08-24,23
+50,Pharmacy Technician,Meat & Seafood Associate,2025-07-21,2026-05-02,95
+51,Customer Service Manager,Pharmacy Technician,2025-10-15,2026-06-20,90
+52,Cake Decorator,Store Manager,2026-03-08,2026-12-10,61
+53,Cake Decorator,Produce Associate,2025-11-11,2026-06-30,45
+54,Front Service Clerk,Store Manager,2025-08-18,2026-04-13,85
+55,Bagger,Cashier,2025-12-11,2026-09-19,9
+56,Meat & Seafood Associate,Deli Associate,2025-09-14,2026-06-10,52
+57,Bagger,Store Manager,2024-07-31,2025-06-13,15
+58,Bakery Associate,Cashier,2025-10-02,2026-05-15,5
+59,Grocery Stock Clerk,Bagger,2026-03-07,2027-02-02,94
+60,Bakery Associate,Deli Associate,2025-08-09,2026-05-27,15
+61,Front Service Clerk,Cashier,2025-05-28,2026-04-20,6
+62,Deli Associate,Pharmacy Technician,2025-04-06,2025-10-03,69
+63,Bagger,Grocery Stock Clerk,2024-08-09,2025-03-27,9
+64,Bakery Associate,Bagger,2024-08-15,2025-05-06,85
+65,Cashier,Deli Associate,2026-02-19,2027-02-18,40
+66,Bagger,Grocery Stock Clerk,2024-08-13,2025-05-24,90
+67,Customer Service Manager,Front Service Clerk,2025-08-28,2026-07-15,54
+68,Meat & Seafood Associate,Pharmacist,2024-08-15,2025-05-19,23
+69,Cashier,Grocery Stock Clerk,2024-10-04,2025-08-25,71
+70,Cashier,Front Service Clerk,2026-06-26,2027-03-10,56
+71,Meat & Seafood Associate,Bagger,2024-11-10,2025-10-11,60
+72,Meat & Seafood Associate,Front Service Clerk,2025-03-31,2026-01-18,66
+73,Meat & Seafood Associate,Assistant Store Manager,2025-02-27,2025-10-08,37
+74,Meat & Seafood Associate,Bakery Associate,2025-01-15,2025-12-30,43
+75,Meat & Seafood Associate,Cashier,2026-03-23,2026-11-18,29
+76,Store Manager,Store Manager,2025-12-05,2026-07-10,32
+77,Cake Decorator,Pharmacy Technician,2025-02-25,2026-01-27,10
+78,Meat & Seafood Associate,Bakery Associate,2025-03-17,2025-12-28,25
+79,Grocery Stock Clerk,Front Service Clerk,2025-05-29,2026-03-31,19
+80,Store Manager,Pharmacy Technician,2024-08-24,2025-08-15,99
+81,Front Service Clerk,Customer Service Manager,2026-03-09,2026-12-22,90
+82,Store Manager,Deli Associate,2025-01-12,2025-11-06,32
+83,Customer Service Manager,Pharmacy Technician,2026-02-22,2026-12-15,60
+84,Deli Associate,Bakery Associate,2024-08-12,2025-06-23,41
+85,Cake Decorator,Pharmacist,2025-03-30,2026-03-01,65
+86,Produce Associate,Customer Service Manager,2025-04-16,2026-03-02,96
+87,Cashier,Pharmacy Technician,2025-02-25,2025-12-17,32
+88,Pharmacy Technician,Pharmacy Technician,2024-09-12,2025-05-20,67
+89,Front Service Clerk,Cashier,2025-02-15,2026-01-21,57
+90,Cashier,Front Service Clerk,2026-04-08,2027-04-05,35
+91,Deli Associate,Assistant Store Manager,2025-07-18,2026-04-05,18
+92,Grocery Stock Clerk,Pharmacist,2026-01-23,2026-09-19,20
+93,Grocery Stock Clerk,Grocery Stock Clerk,2025-11-19,2026-06-03,43
+94,Grocery Stock Clerk,Store Manager,2024-12-18,2025-10-13,27
+95,Pharmacy Technician,Bakery Associate,2025-04-22,2026-01-26,90
+96,Grocery Stock Clerk,Produce Associate,2026-06-06,2027-04-29,1
+97,Pharmacy Technician,Grocery Stock Clerk,2025-07-01,2026-03-14,54
+98,Pharmacy Technician,Bakery Associate,2024-12-22,2025-11-06,29
+99,Cashier,Grocery Stock Clerk,2025-02-12,2025-10-06,63
+100,Bagger,Meat & Seafood Associate,2026-05-28,2027-03-03,87

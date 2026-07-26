@@ -1,25 +1,13 @@
 """
-generate_publix_data.py
+Generates realistic fake data for a supermarket database,
+matching the updated schema defined in init.sql:
 
-Generates realistic fake data for a "Publix" grocery store chain database,
-matching the schema defined in init.sql:
+    store, employee, employee_role_history, customer, supplier, product, 
+    inventory, transaction, transaction_item, transaction_return, 
+    purchase_order, purchase_order_item
 
-    store, employee, customer, supplier, product, inventory,
-    sale, sale_item, purchase_order, purchase_order_item
-
-Uses the Faker library for names, addresses, phone numbers, dates, etc.,
-combined with hand-curated Publix-flavored reference data (store naming
-convention, department/role names, grocery product categories) so the
-output reads like a real regional supermarket chain rather than generic
-placeholder data.
-
-Output: a single .sql file of INSERT statements, written in FK-safe order,
-plus a set of matching .csv files (one per table) for easy inspection or
-bulk-loading with tools that prefer CSV.
-
-Usage:
-    python3 generate_publix_data.py
-    python3 generate_publix_data.py --seed 42 --stores 8 --customers 500
+Output: a single .sql file of INSERT statements written in FK-safe order,
+plus matching .csv files per table.
 """
 
 import argparse
@@ -31,7 +19,7 @@ from datetime import date, timedelta
 from faker import Faker
 
 # --------------------------------------------------------------------------
-# Publix-flavored reference data
+# Reference data
 # --------------------------------------------------------------------------
 
 FLORIDA_CITIES = [
@@ -42,8 +30,8 @@ FLORIDA_CITIES = [
 ]
 
 STORE_NAME_TEMPLATES = [
-    "Publix Super Market at {plaza}",
-    "Publix Super Market at {plaza} Shopping Center",
+    "Super Market at {plaza}",
+    "Super Market at {plaza} Shopping Center",
 ]
 
 PLAZA_NAMES = [
@@ -71,86 +59,49 @@ EMPLOYEE_ROLES = [
     "Cake Decorator",
 ]
 
-# category -> (typical unit price range, typical reorder level range)
 PRODUCT_CATALOG = {
-    "Produce": {
-        "items": [
-            "Bananas", "Gala Apples", "Roma Tomatoes", "Baby Carrots",
-            "Russet Potatoes", "Yellow Onions", "Avocados", "Strawberries",
-            "Blueberries", "Broccoli Crowns", "Iceberg Lettuce", "Limes",
-        ],
-        "price_range": (0.99, 6.99),
-    },
-    "Dairy": {
-        "items": [
-            "Publix Whole Milk Gallon", "Publix 2% Milk Half Gallon",
-            "Large Grade A Eggs (Dozen)", "Publix Salted Butter",
-            "Shredded Mozzarella Cheese", "Greek Yogurt (32oz)",
-            "Heavy Whipping Cream", "American Cheese Slices",
-        ],
-        "price_range": (2.49, 7.99),
-    },
-    "Meat & Seafood": {
-        "items": [
-            "Boneless Chicken Breast", "80/20 Ground Beef",
-            "Applewood Smoked Bacon", "Atlantic Salmon Fillet",
-            "Publix Deli Rotisserie Chicken", "Pork Tenderloin",
-            "Jumbo Shrimp (Peeled & Deveined)", "Italian Sausage Links",
-        ],
-        "price_range": (4.99, 15.99),
-    },
-    "Bakery": {
-        "items": [
-            "Publix Bakery French Bread", "Cuban Bread Loaf",
-            "Chocolate Chip Cookies (12ct)", "Key Lime Pie",
-            "Publix Deli Cuban Sandwich", "Dozen Glazed Donuts",
-            "Sourdough Boule", "Birthday Cake, 8-inch Round",
-        ],
-        "price_range": (2.99, 24.99),
-    },
-    "Frozen": {
-        "items": [
-            "Frozen Mixed Vegetables", "Publix Vanilla Ice Cream",
-            "Frozen Pepperoni Pizza", "Frozen Waffles",
-            "Frozen Chicken Tenders", "Frozen Shrimp Bag",
-            "Frozen Pie Crust (2ct)", "Frozen Orange Juice Concentrate",
-        ],
-        "price_range": (2.99, 9.99),
-    },
-    "Pantry": {
-        "items": [
-            "Publix Pasta, 16oz", "Marinara Sauce Jar", "Jasmine Rice, 2lb",
-            "Extra Virgin Olive Oil", "Creamy Peanut Butter",
-            "Canned Black Beans", "All-Purpose Flour, 5lb",
-            "Granulated Sugar, 4lb", "Cereal, Family Size",
-        ],
-        "price_range": (1.49, 8.99),
-    },
-    "Beverages": {
-        "items": [
-            "Publix Orange Juice, 59oz", "Bottled Spring Water (24pk)",
-            "Ground Coffee, 12oz", "Sweet Tea, Gallon",
-            "Sparkling Water (8pk)", "Cola 12-pack Cans",
-            "Publix Lemonade, 59oz",
-        ],
-        "price_range": (1.99, 12.99),
-    },
-    "Household": {
-        "items": [
-            "Paper Towels (6 Big Rolls)", "Bath Tissue (12 Mega Rolls)",
-            "Laundry Detergent", "Dish Soap", "Trash Bags (30ct)",
-            "All-Purpose Cleaner Spray", "Aluminum Foil, 75 sq ft",
-        ],
-        "price_range": (3.99, 19.99),
-    },
-    "Deli": {
-        "items": [
-            "Publix Deli Sliced Turkey Breast", "Provolone Cheese, Sliced",
-            "Publix Chicken Tender Sub", "Potato Salad (Deli, 1lb)",
-            "Publix Deli Ham, Sliced", "Macaroni Salad (Deli, 1lb)",
-        ],
-        "price_range": (3.99, 11.99),
-    },
+    "Produce": [
+        "Bananas", "Gala Apples", "Roma Tomatoes", "Baby Carrots",
+        "Russet Potatoes", "Yellow Onions", "Avocados", "Strawberries",
+        "Blueberries", "Broccoli Crowns", "Iceberg Lettuce", "Limes",
+    ],
+    "Dairy": [
+        "Whole Milk Gallon", "2% Milk Half Gallon",
+        "Large Grade A Eggs (Dozen)", "Salted Butter",
+        "Shredded Mozzarella Cheese", "Greek Yogurt (32oz)",
+        "Heavy Whipping Cream", "American Cheese Slices",
+    ],
+    "Meat & Seafood": [
+        "Boneless Chicken Breast", "80/20 Ground Beef",
+        "Applewood Smoked Bacon", "Atlantic Salmon Fillet",
+        "Rotisserie Chicken", "Pork Tenderloin",
+        "Jumbo Shrimp", "Italian Sausage Links",
+    ],
+    "Bakery": [
+        "French Bread", "Cuban Bread Loaf",
+        "Chocolate Chip Cookies (12ct)", "Key Lime Pie",
+        "Cuban Sandwich", "Dozen Glazed Donuts",
+        "Sourdough Boule", "Birthday Cake",
+    ],
+    "Frozen": [
+        "Frozen Mixed Vegetables", "Vanilla Ice Cream",
+        "Frozen Pepperoni Pizza", "Frozen Waffles",
+        "Frozen Chicken Tenders", "Frozen Shrimp Bag",
+    ],
+    "Pantry": [
+        "Pasta 16oz", "Marinara Sauce Jar", "Jasmine Rice 2lb",
+        "Extra Virgin Olive Oil", "Creamy Peanut Butter",
+        "Canned Black Beans", "All-Purpose Flour 5lb",
+    ],
+    "Beverages": [
+        "Orange Juice 59oz", "Bottled Spring Water (24pk)",
+        "Ground Coffee 12oz", "Sweet Tea Gallon",
+        "Sparkling Water (8pk)", "Cola 12-pack Cans",
+    ],
+    "Household": [
+        "Paper Towels (6 Rolls)", "Bath Tissue (12 Rolls)",
+        "Laundry Detergent", "Dish Soap", "Trash Bags (30ct)",
+    ],
 }
 
 SUPPLIER_TYPES = [
@@ -159,94 +110,106 @@ SUPPLIER_TYPES = [
     "Wholesale Grocers", "Seafood Imports",
 ]
 
-PO_STATUSES = ["Pending", "Shipped", "Received", "Cancelled"]
+PO_STATUSES = ["Pending", "Ordered", "Received", "Cancelled"]
 
 # --------------------------------------------------------------------------
-# Data generation
+# Data Generator
 # --------------------------------------------------------------------------
 
 
-class PublixDataGenerator:
-    def __init__(self, seed=None, num_stores=6, num_employees_per_store=(8, 15),
-                 num_customers=300, num_suppliers=15, avg_products_per_category=6,
-                 num_sales=1500, max_items_per_sale=6, num_purchase_orders=200,
-                 max_items_per_po=8):
+class DatabaseDataGenerator:
+    def __init__(
+        self,
+        seed=42,
+        num_stores=10,
+        num_employees=100,
+        num_customers=100,
+        num_suppliers=20,
+        num_transactions=100,
+        num_purchase_orders=100,
+        num_returns=100,
+        num_promotions=100,
+    ):
         self.fake = Faker()
         if seed is not None:
             Faker.seed(seed)
             random.seed(seed)
 
         self.num_stores = num_stores
-        self.num_employees_per_store = num_employees_per_store
+        self.num_employees = num_employees
         self.num_customers = num_customers
         self.num_suppliers = num_suppliers
-        self.avg_products_per_category = avg_products_per_category
-        self.num_sales = num_sales
-        self.max_items_per_sale = max_items_per_sale
+        self.num_transactions = num_transactions
         self.num_purchase_orders = num_purchase_orders
-        self.max_items_per_po = max_items_per_po
+        self.num_returns = num_returns
+        self.num_promotions = num_promotions
 
-        # storage for generated rows, keyed by table name
         self.data = {
             "store": [],
             "employee": [],
+            "employee_role_history": [],
             "customer": [],
             "supplier": [],
             "product": [],
             "inventory": [],
-            "sale": [],
-            "sale_item": [],
+            "transaction": [],
+            "transaction_item": [],
+            "transaction_return": [],
             "purchase_order": [],
             "purchase_order_item": [],
         }
 
-    # ---- individual table generators -----------------------------------
-
     def gen_stores(self):
-        used_plazas = random.sample(PLAZA_NAMES, k=min(self.num_stores, len(PLAZA_NAMES)))
-        for i in range(self.num_stores):
-            plaza = used_plazas[i] if i < len(used_plazas) else self.fake.city() + " Plaza"
+        for i in range(1, self.num_stores + 1):
+            plaza = random.choice(PLAZA_NAMES)
             name = random.choice(STORE_NAME_TEMPLATES).format(plaza=plaza)
             city = random.choice(FLORIDA_CITIES)
             self.data["store"].append({
-                "store_id": i + 1,
+                "store_id": i,
                 "store_name": name,
                 "address": f"{self.fake.building_number()} {self.fake.street_name()}, {city}, FL {self.fake.zipcode_in_state(state_abbr='FL')}",
                 "phone": self.fake.numerify("(###) ###-####"),
             })
 
     def gen_employees(self):
-        emp_id = 1
-        for store in self.data["store"]:
-            n = random.randint(*self.num_employees_per_store)
-            # ensure exactly one Store Manager per store
-            roles = ["Store Manager"] + random.choices(
-                [r for r in EMPLOYEE_ROLES if r != "Store Manager"], k=n - 1
-            )
-            for role in roles:
-                self.data["employee"].append({
-                    "employee_id": emp_id,
-                    "employee_name": self.fake.name(),
-                    "role": role,
-                    "store_id": store["store_id"],
-                })
-                emp_id += 1
+        store_ids = [s["store_id"] for s in self.data["store"]]
+        for i in range(1, self.num_employees + 1):
+            self.data["employee"].append({
+                "employee_id": i,
+                "employee_name": self.fake.name(),
+                "role": random.choice(EMPLOYEE_ROLES),
+                "store_id": random.choice(store_ids),
+            })
+
+    def gen_employee_role_history(self):
+        today = date.today()
+        emp_ids = [e["employee_id"] for e in self.data["employee"]]
+        for i in range(1, self.num_promotions + 1):
+            promo_date = today - timedelta(days=random.randint(30, 730))
+            term_date = promo_date + timedelta(days=random.randint(180, 365))
+            self.data["employee_role_history"].append({
+                "history_id": i,
+                "previous_role": random.choice(EMPLOYEE_ROLES),
+                "new_role": random.choice(EMPLOYEE_ROLES),
+                "promotion_date": promo_date.isoformat(),
+                "termination_date": term_date.isoformat(),
+                "employee_id": random.choice(emp_ids),
+            })
 
     def gen_customers(self):
-        for i in range(self.num_customers):
-            name = self.fake.name()
+        for i in range(1, self.num_customers + 1):
             self.data["customer"].append({
-                "customer_id": i + 1,
-                "customer_name": name,
+                "customer_id": i,
+                "customer_name": self.fake.name(),
                 "email": self.fake.unique.email(),
                 "phone": self.fake.numerify("(###) ###-####"),
             })
 
     def gen_suppliers(self):
-        for i in range(self.num_suppliers):
+        for i in range(1, self.num_suppliers + 1):
             company = f"{self.fake.last_name()} {random.choice(SUPPLIER_TYPES)}"
             self.data["supplier"].append({
-                "supplier_id": i + 1,
+                "supplier_id": i,
                 "company_name": company,
                 "email": self.fake.company_email(),
                 "phone": self.fake.numerify("(###) ###-####"),
@@ -255,16 +218,14 @@ class PublixDataGenerator:
     def gen_products(self):
         product_id = 1
         supplier_ids = [s["supplier_id"] for s in self.data["supplier"]]
-        for category, info in PRODUCT_CATALOG.items():
-            for item_name in info["items"]:
-                low, high = info["price_range"]
-                price = round(random.uniform(low, high), 2)
+        for category, items in PRODUCT_CATALOG.items():
+            for item in items:
                 self.data["product"].append({
                     "product_id": product_id,
-                    "product_name": item_name,
+                    "product_name": item,
                     "category": category,
-                    "unit_price": price,
-                    "reorder_level": str(random.choice([10, 15, 20, 25, 50, 100])),
+                    "unit_price": round(random.uniform(1.50, 25.00), 2),
+                    "reorder_level": random.choice([10, 15, 20, 25, 50]),
                     "supplier_id": random.choice(supplier_ids),
                 })
                 product_id += 1
@@ -272,61 +233,77 @@ class PublixDataGenerator:
     def gen_inventory(self):
         inventory_id = 1
         today = date.today()
+        # Generates inventory entries for store-product pairs
         for store in self.data["store"]:
-            for product in self.data["product"]:
-                # not every store necessarily stocks every product at full detail,
-                # but for simplicity every store carries every product line
+            # Sample subset of products to keep table count reasonable
+            sampled_products = random.sample(self.data["product"], k=min(10, len(self.data["product"])))
+            for product in sampled_products:
                 self.data["inventory"].append({
                     "inventory_id": inventory_id,
-                    "quantity_on_hand": random.randint(0, 250),
-                    "last_updated": (today - timedelta(days=random.randint(0, 30))).isoformat(),
+                    "quantity_on_hand": random.randint(5, 150),
+                    "last_updated": (today - timedelta(days=random.randint(0, 15))).isoformat(),
                     "store_id": store["store_id"],
                     "product_id": product["product_id"],
                 })
                 inventory_id += 1
 
-    def gen_sales(self):
-        sale_item_id = 1
+    def gen_transactions(self):
+        item_id = 1
         store_ids = [s["store_id"] for s in self.data["store"]]
         customer_ids = [c["customer_id"] for c in self.data["customer"]]
-        employees_by_store = {}
-        for e in self.data["employee"]:
-            employees_by_store.setdefault(e["store_id"], []).append(e["employee_id"])
-
+        emp_ids = [e["employee_id"] for e in self.data["employee"]]
         today = date.today()
-        for sale_id in range(1, self.num_sales + 1):
-            store_id = random.choice(store_ids)
-            employee_id = random.choice(employees_by_store[store_id])
-            # ~85% of sales tied to a known (loyalty) customer, rest anonymous/cash sale
-            customer_id = random.choice(customer_ids) if random.random() < 0.85 else None
-            sale_date = today - timedelta(days=random.randint(0, 365))
 
-            n_items = random.randint(1, self.max_items_per_sale)
+        for tx_id in range(1, self.num_transactions + 1):
+            tx_date = today - timedelta(days=random.randint(0, 180))
+            
+            # Create 1 to 3 items per transaction
+            n_items = random.randint(1, 3)
             chosen_products = random.sample(self.data["product"], k=n_items)
             total_amount = 0.0
 
             for product in chosen_products:
-                qty = random.randint(1, 5)
-                unit_price = product["unit_price"]
-                line_total = round(qty * unit_price, 2)
+                qty = random.randint(1, 4)
+                price = product["unit_price"]
+                line_total = round(qty * price, 2)
                 total_amount += line_total
-                self.data["sale_item"].append({
-                    "sale_item_id": sale_item_id,
+
+                self.data["transaction_item"].append({
+                    "transaction_item_id": item_id,
                     "quantity": qty,
-                    "unit_price": unit_price,
+                    "unit_price": price,
                     "line_total": line_total,
-                    "sale_id": sale_id,
+                    "transaction_id": tx_id,
                     "product_id": product["product_id"],
                 })
-                sale_item_id += 1
+                item_id += 1
 
-            self.data["sale"].append({
-                "sale_id": sale_id,
-                "sale_date": sale_date.isoformat(),
+            self.data["transaction"].append({
+                "transaction_id": tx_id,
+                "transaction_date": tx_date.isoformat(),
                 "total_amount": round(total_amount, 2),
-                "store_id": store_id,
-                "employee_id": employee_id,
-                "customer_id": customer_id,
+                "store_id": random.choice(store_ids),
+                "employee_id": random.choice(emp_ids),
+                "customer_id": random.choice(customer_ids) if random.random() < 0.85 else None,
+            })
+
+    def gen_transaction_returns(self):
+        tx_items = self.data["transaction_item"]
+        customer_ids = [c["customer_id"] for c in self.data["customer"]]
+        today = date.today()
+        
+        sampled_items = random.choices(tx_items, k=self.num_returns)
+        for i, item in enumerate(sampled_items, start=1):
+            qty_returned = random.randint(1, item["quantity"])
+            refund = round(qty_returned * item["unit_price"], 2)
+            
+            self.data["transaction_return"].append({
+                "return_id": i,
+                "return_date": (today - timedelta(days=random.randint(0, 30))).isoformat(),
+                "quantity_returned": qty_returned,
+                "refund_amount": refund,
+                "transaction_item_id": item["transaction_item_id"],
+                "customer_id": random.choice(customer_ids),
             })
 
     def gen_purchase_orders(self):
@@ -337,30 +314,28 @@ class PublixDataGenerator:
 
         for po_id in range(1, self.num_purchase_orders + 1):
             supplier_id = random.choice(supplier_ids)
-            store_id = random.choice(store_ids)
-            order_date = today - timedelta(days=random.randint(0, 180))
-            status = random.choice(PO_STATUSES)
+            po_date = today - timedelta(days=random.randint(0, 90))
 
             self.data["purchase_order"].append({
                 "po_id": po_id,
-                "order_date": order_date.isoformat(),
-                "status": status,
+                "order_date": po_date.isoformat(),
+                "status": random.choice(PO_STATUSES),
                 "supplier_id": supplier_id,
-                "store_id": store_id,
+                "store_id": random.choice(store_ids),
             })
 
-            # only order products this supplier actually provides
             supplier_products = [p for p in self.data["product"] if p["supplier_id"] == supplier_id]
             if not supplier_products:
-                continue
-            n_items = min(len(supplier_products), random.randint(1, self.max_items_per_po))
-            for product in random.sample(supplier_products, k=n_items):
-                qty_ordered = random.randint(20, 300)
-                unit_cost = round(product["unit_price"] * random.uniform(0.45, 0.75), 2)
+                supplier_products = random.sample(self.data["product"], k=1)
+
+            chosen = random.sample(supplier_products, k=min(len(supplier_products), random.randint(1, 2)))
+            for product in chosen:
+                qty = random.randint(20, 100)
+                cost = round(product["unit_price"] * 0.6, 2)
                 self.data["purchase_order_item"].append({
                     "po_item_id": po_item_id,
-                    "quantity_ordered": qty_ordered,
-                    "unit_cost": unit_cost,
+                    "quantity_ordered": qty,
+                    "unit_cost": cost,
                     "po_id": po_id,
                     "product_id": product["product_id"],
                 })
@@ -369,23 +344,25 @@ class PublixDataGenerator:
     def generate_all(self):
         self.gen_stores()
         self.gen_employees()
+        self.gen_employee_role_history()
         self.gen_customers()
         self.gen_suppliers()
         self.gen_products()
         self.gen_inventory()
-        self.gen_sales()
+        self.gen_transactions()
+        self.gen_transaction_returns()
         self.gen_purchase_orders()
         return self.data
 
 
 # --------------------------------------------------------------------------
-# Output helpers
+# File Formatting & Output
 # --------------------------------------------------------------------------
 
-# order matters: respects FK dependencies from init.sql
 TABLE_ORDER = [
-    "store", "employee", "customer", "supplier", "product",
-    "inventory", "sale", "sale_item", "purchase_order", "purchase_order_item",
+    "store", "employee", "employee_role_history", "customer", "supplier",
+    "product", "inventory", "transaction", "transaction_item",
+    "transaction_return", "purchase_order", "purchase_order_item",
 ]
 
 
@@ -402,8 +379,7 @@ def sql_literal(value):
 
 def write_sql(data, path):
     with open(path, "w") as f:
-        f.write("-- Auto-generated fake data for Publix grocery store schema\n")
-        f.write("-- Generated by generate_publix_data.py using Faker\n\n")
+        f.write("-- Generated mock SQL data\n\n")
         for table in TABLE_ORDER:
             rows = data[table]
             if not rows:
@@ -412,9 +388,7 @@ def write_sql(data, path):
             f.write(f"-- {table} ({len(rows)} rows)\n")
             for row in rows:
                 values = ", ".join(sql_literal(row[c]) for c in columns)
-                f.write(
-                    f"INSERT INTO {table} ({', '.join(columns)}) VALUES ({values});\n"
-                )
+                f.write(f"INSERT INTO {table} ({', '.join(columns)}) VALUES ({values});\n")
             f.write("\n")
 
 
@@ -431,44 +405,45 @@ def write_csvs(data, out_dir):
             writer.writerows(rows)
 
 
-# --------------------------------------------------------------------------
-# CLI entry point
-# --------------------------------------------------------------------------
-
-
 def main():
-    parser = argparse.ArgumentParser(description="Generate fake Publix grocery store data.")
-    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
-    parser.add_argument("--stores", type=int, default=6, help="Number of store locations")
-    parser.add_argument("--customers", type=int, default=300, help="Number of customers")
-    parser.add_argument("--suppliers", type=int, default=15, help="Number of suppliers")
-    parser.add_argument("--sales", type=int, default=1500, help="Number of sales transactions")
-    parser.add_argument("--purchase-orders", type=int, default=200, help="Number of purchase orders")
-    parser.add_argument("--out-dir", type=str, default=".", help="Output directory")
+    parser = argparse.ArgumentParser(description="Generate fake retail database data.")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument("--stores", type=int, default=10, help="Number of stores")
+    parser.add_argument("--employees", type=int, default=100, help="Number of employees")
+    parser.add_argument("--customers", type=int, default=100, help="Number of customers")
+    parser.add_argument("--suppliers", type=int, default=20, help="Number of suppliers")
+    parser.add_argument("--transactions", type=int, default=100, help="Number of transactions")
+    parser.add_argument("--purchase-orders", type=int, default=100, help="Number of purchase orders")
+    parser.add_argument("--returns", type=int, default=100, help="Number of returns")
+    parser.add_argument("--promotions", type=int, default=100, help="Number of promotion history records")
+    parser.add_argument("--out-dir", type=str, default=".", help="Output folder")
     args = parser.parse_args()
 
-    generator = PublixDataGenerator(
+    generator = DatabaseDataGenerator(
         seed=args.seed,
         num_stores=args.stores,
+        num_employees=args.employees,
         num_customers=args.customers,
         num_suppliers=args.suppliers,
-        num_sales=args.sales,
+        num_transactions=args.transactions,
         num_purchase_orders=args.purchase_orders,
+        num_returns=args.returns,
+        num_promotions=args.promotions,
     )
     data = generator.generate_all()
 
     os.makedirs(args.out_dir, exist_ok=True)
-    sql_path = os.path.join(args.out_dir, "publix_fake_data.sql")
-    csv_dir = os.path.join(args.out_dir, "publix_csv")
+    sql_path = os.path.join(args.out_dir, "fake_data.sql")
+    csv_dir = os.path.join(args.out_dir, "csv_data")
 
     write_sql(data, sql_path)
     write_csvs(data, csv_dir)
 
     print("Generated rows per table:")
     for table in TABLE_ORDER:
-        print(f"  {table:22s} {len(data[table])}")
-    print(f"\nSQL file:  {sql_path}")
-    print(f"CSV files: {csv_dir}/*.csv")
+        print(f"  {table:24s} {len(data[table])}")
+    print(f"\nSQL output:  {sql_path}")
+    print(f"CSV output:  {csv_dir}/*.csv")
 
 
 if __name__ == "__main__":
