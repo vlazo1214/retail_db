@@ -30,8 +30,8 @@ FLORIDA_CITIES = [
 ]
 
 STORE_NAME_TEMPLATES = [
-    "Super Market at {plaza}",
-    "Super Market at {plaza} Shopping Center",
+    "Secretx at {plaza}",
+    "Secretx at {plaza} Shopping Center",
 ]
 
 PLAZA_NAMES = [
@@ -123,9 +123,9 @@ class DatabaseDataGenerator:
         seed=42,
         num_stores=10,
         num_employees=100,
-        num_customers=100,
+        num_customers=200,
         num_suppliers=20,
-        num_transactions=100,
+        num_transactions=500,
         num_purchase_orders=100,
         num_returns=100,
         num_promotions=100,
@@ -258,7 +258,7 @@ class DatabaseDataGenerator:
             tx_date = today - timedelta(days=random.randint(0, 180))
             
             # Create 1 to 3 items per transaction
-            n_items = random.randint(1, 3)
+            n_items = random.randint(25, 50)
             chosen_products = random.sample(self.data["product"], k=n_items)
             total_amount = 0.0
 
