@@ -20,7 +20,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the app
 COPY . .
 
-# RUN sed -i 's/\r$//' /app/boot.sh && \
-#     chmod +x /app/boot.sh
-#
-# CMD ["/bin/bash", "/app/boot.sh"]
+# Run the Flask app directly (uses app.py's own __main__ block, which sets
+# use_reloader=False so it plays nicely with `restart: always`).
+CMD ["python", "app.py"]
