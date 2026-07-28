@@ -26,7 +26,12 @@
   </div>
 </header>
 
-<div class="layout">
+<nav class="mode-tabs" aria-label="View switcher">
+  <button class="mode-tab active" id="modeReportsBtn" data-mode="reports">&#128202; Reports</button>
+  <button class="mode-tab" id="modeManageBtn" data-mode="manage">&#128193; Manage Data</button>
+</nav>
+
+<div class="layout" id="reportsLayout">
 
   <nav class="aisle-list" aria-label="Available reports">
     <h2>Aisle Guide</h2>
@@ -43,7 +48,7 @@
     <div id="receiptWrap" class="receipt-wrap" hidden>
       <div class="receipt" id="receipt">
         <div class="receipt__header">
-          <p class="receipt__store">PUBLIX SUPER MARKETS, INC.</p>
+          <p class="receipt__store">SECRETX SUPER MARKETS, INC.</p>
           <p class="receipt__addr">Where Shopping Is a Pleasure&trade;</p>
           <p class="receipt__rule">* * * * * * * * * * * * * * * * * *</p>
           <h3 id="receiptTitle">&nbsp;</h3>
@@ -63,7 +68,7 @@
         <div class="receipt__footer">
           <p class="receipt__rule">- - - - - - - - - - - - - - - - - -</p>
           <p id="rowCount">0 ITEMS</p>
-          <p class="receipt__thanks">THANK YOU FOR SHOPPING PUBLIX</p>
+          <p class="receipt__thanks">THANK YOU FOR SHOPPING SECRETX</p>
         </div>
       </div>
     </div>
@@ -71,6 +76,51 @@
 
 </div>
 
+<div class="layout" id="manageLayout" hidden>
+
+  <nav class="aisle-list" aria-label="Available tables">
+    <h2>Tables</h2>
+    <p class="aisle-list__hint">Pick a table to add, edit, or delete rows.</p>
+    <ol id="tableMenu"></ol>
+  </nav>
+
+  <main class="counter">
+    <div id="crudEmptyState" class="empty-state">
+      <span class="empty-state__icon">&#128193;</span>
+      <p>Choose a table from the list to manage its records.</p>
+    </div>
+
+    <div id="crudPanel" hidden>
+      <div class="crud-toolbar">
+        <h3 id="crudTableTitle">&nbsp;</h3>
+        <button id="crudAddBtn" class="btn btn--primary" type="button">+ Add Row</button>
+      </div>
+
+      <div id="crudFormWrap" class="crud-form-wrap" hidden>
+        <form id="crudForm" class="crud-form">
+          <div id="crudFormFields" class="crud-form__fields"></div>
+          <div class="crud-form__actions">
+            <button type="submit" class="btn btn--primary" id="crudSaveBtn">Save</button>
+            <button type="button" class="btn btn--ghost" id="crudCancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <p id="crudMsg" class="crud-msg" hidden></p>
+
+      <div id="crudTableWrap" class="crud-table-wrap">
+        <table id="crudTable" class="crud-table">
+          <thead><tr id="crudTableHead"></tr></thead>
+          <tbody id="crudTableBody"></tbody>
+        </table>
+        <p id="crudEmptyRows" class="empty-rows" hidden>No rows yet — add the first one.</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='crud.js') }}"></script>
 </body>
 </html>

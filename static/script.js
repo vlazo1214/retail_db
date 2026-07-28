@@ -126,3 +126,24 @@ function renderTable(columns, rows) {
 
 checkHealth();
 loadMenu();
+
+// ---------- Mode tabs (Reports / Manage Data) ----------
+const modeReportsBtn = document.getElementById("modeReportsBtn");
+const modeManageBtn = document.getElementById("modeManageBtn");
+const reportsLayout = document.getElementById("reportsLayout");
+const manageLayout = document.getElementById("manageLayout");
+
+function setMode(mode) {
+  const isReports = mode === "reports";
+  reportsLayout.hidden = !isReports;
+  manageLayout.hidden = isReports;
+  modeReportsBtn.classList.toggle("active", isReports);
+  modeManageBtn.classList.toggle("active", !isReports);
+
+  if (!isReports && window.initManageData) {
+    window.initManageData();
+  }
+}
+
+modeReportsBtn.addEventListener("click", () => setMode("reports"));
+modeManageBtn.addEventListener("click", () => setMode("manage"));
