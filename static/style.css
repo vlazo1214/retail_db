@@ -104,6 +104,13 @@ body {
   align-items: start;
 }
 
+/* .layout sets display:grid at the same specificity as the browser's
+   built-in [hidden] { display:none }, and author styles win ties over the
+   user-agent stylesheet — so without this, a hidden .layout still shows. */
+.layout[hidden] {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .layout { grid-template-columns: 1fr; }
 }
@@ -193,6 +200,9 @@ body {
 .receipt-wrap {
   display: flex;
   justify-content: center;
+}
+.receipt-wrap[hidden] {
+  display: none;
 }
 
 .receipt {
