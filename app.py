@@ -62,7 +62,7 @@ def run_query(sql: str):
 
 QUERIES = {
     "sales-by-store-monthly": {
-        "label": "Total sales by store — Monthly",
+        "label": "Total sales by store: Monthly",
         "sql": """
             SELECT s.store_name,
                    DATE_TRUNC('month', t.transaction_date) AS month,
@@ -74,7 +74,7 @@ QUERIES = {
         """,
     },
     "sales-by-store-quarterly": {
-        "label": "Total sales by store — Quarterly",
+        "label": "Total sales by store: Quarterly",
         "sql": """
             SELECT s.store_name,
                    DATE_TRUNC('quarter', t.transaction_date) AS quarter,
@@ -86,7 +86,7 @@ QUERIES = {
         """,
     },
     "sales-by-store-yearly": {
-        "label": "Total sales by store — Yearly",
+        "label": "Total sales by store: Yearly",
         "sql": """
             SELECT s.store_name,
                    DATE_TRUNC('year', t.transaction_date) AS year,
