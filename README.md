@@ -26,6 +26,8 @@ starts (the app also waits on the db's healthcheck). The `app` container
 talks to Postgres over the internal Docker network (`db:5432`), independent
 of whatever host port `DB_PORT` maps to.
 
+Run `import_data.py` to insert data into the database.
+
 To reset everything (including the database volume):
 
 ```bash
